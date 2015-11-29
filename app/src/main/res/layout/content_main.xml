@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".MainActivity"
+    tools:showIn="@layout/activity_main"
+    >
+
+
+    <TableRow
+        android:id="@+id/row0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/taskNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Task Name"
+            android:textColor="@color/colorBlack"
+            android:gravity="end"
+            android:paddingRight="8dp"
+            android:paddingEnd="8dp"
+            android:paddingLeft="0dp"
+            android:paddingStart="0dp"/>
+
+        <EditText
+            android:id="@+id/taskNameEditText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_span="4"
+            android:layout_weight="1"
+            android:inputType="text"
+            />
+
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/row1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/lengthTimeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Length of Time"
+            android:textColor="@color/colorBlack"
+            android:gravity="end"
+            android:paddingLeft="0dp"
+            android:paddingRight="8dp"
+            android:paddingStart="0dp"
+            android:paddingEnd="8dp"/>
+
+        <EditText
+            android:id="@+id/lengthTimeHrEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:layout_weight=".5"
+            android:layout_marginRight="2dp"
+            android:layout_marginEnd="2dp"
+            />
+
+        <TextView
+            android:id="@+id/lengthTimeHrTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hr"
+            android:layout_marginRight="20dp"
+            android:layout_marginEnd="20dp"/>
+
+        <EditText
+            android:id="@+id/lengthTimeMinEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:layout_marginRight="2dp"
+            android:layout_marginEnd="2dp"
+            android:inputType="number"/>
+
+        <TextView
+            android:id="@+id/lengthTimeMinTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Min"
+            android:layout_marginRight="20dp"
+            android:layout_marginEnd="20dp"/>
+
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/row2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/repeatTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Repeat"
+            android:textColor="@color/colorBlack"
+            android:paddingLeft="0dp"
+            android:paddingRight="8dp"
+            android:paddingStart="0dp"
+            android:paddingEnd="8dp"
+            android:gravity="end" />
+
+        <TextView
+            android:id="@+id/repeatValueTextView"
+            android:layout_width="wrap_content"
+            android:text="One-time event"/>
+
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/row3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ToggleButton
+            android:id="@+id/dayMondayToggleButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="-2dp"
+            android:layout_marginEnd="-2dp"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:layout_weight="1"
+            android:textOff="S"
+            android:textOn="S"
+            android:textSize="26sp" />
+
+        <ToggleButton
+            android:id="@+id/dayTuesdayToggleButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="-2dp"
+            android:layout_marginRight="-2dp"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:layout_weight="1"
+            android:textOff="M"
+            android:textOn="M"
+            android:textSize="26sp" />
+
+        <ToggleButton
+            android:id="@+id/dayWednesdayToggleButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="-2dp"
+            android:layout_marginRight="-2dp"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:layout_weight="1"
+            android:textOff="T"
+            android:textOn="T"
+            android:textSize="26sp" />
+
+        <ToggleButton
+            android:id="@+id/dayThursdayToggleButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="-2dp"
+            android:layout_marginRight="-2dp"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:layout_weight="1"
+            android:textOff="W"
+            android:textOn="W"
+            android:textSize="26sp" />
+
+        <ToggleButton
+            android:id="@+id/dayFridayToggleButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="-2dp"
+            android:layout_marginRight="-2dp"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:layout_weight="1"
+            android:textOff="T"
+            android:textOn="T"
+            android:textSize="26sp" />
+
+        <ToggleButton
+            android:id="@+id/daySaturdayToggleButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="-2dp"
+            android:layout_marginRight="-2dp"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:layout_weight="1"
+            android:textOff="F"
+            android:textOn="F"
+            android:textSize="26sp" />
+
+        <ToggleButton
+            android:id="@+id/daySundayToggleButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="-2dp"
+            android:layout_marginRight="-2dp"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:layout_weight="1"
+            android:textOff="S"
+            android:textOn="S"
+            android:textSize="26sp" />
+
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/row4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:onClick=""
+            android:text="Add Task" />
+
+    </TableRow>
+
+
+</TableLayout>
+
+
+
