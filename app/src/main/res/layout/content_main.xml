@@ -34,7 +34,8 @@
                     android:paddingRight="8dp"
                     android:paddingStart="0dp"
                     android:text="Task Name"
-                    android:textColor="@color/colorBlack" />
+                    style="@style/Base.TextAppearance.AppCompat.Subhead"
+                    />
 
                 <EditText
                     android:id="@+id/taskNameEditText"
@@ -61,7 +62,7 @@
                     android:paddingRight="8dp"
                     android:paddingStart="0dp"
                     android:text="Length of Time"
-                    android:textColor="@color/colorBlack" />
+                    style="@style/Base.TextAppearance.AppCompat.Subhead" />
 
                 <EditText
                     android:id="@+id/lengthTimeHrEditText"
@@ -78,7 +79,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="20dp"
                     android:layout_marginRight="20dp"
-                    android:text="Hr" />
+                    android:text="Hr"
+                    style="@style/Base.TextAppearance.AppCompat.Body1"/>
 
                 <EditText
                     android:id="@+id/lengthTimeMinEditText"
@@ -95,7 +97,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="20dp"
                     android:layout_marginRight="20dp"
-                    android:text="Min" />
+                    android:text="Min"
+                    style="@style/Base.TextAppearance.AppCompat.Body1"/>
 
             </TableRow>
 
@@ -114,11 +117,12 @@
                     android:paddingRight="8dp"
                     android:paddingStart="0dp"
                     android:text="Repeat"
-                    android:textColor="@color/colorBlack" />
+                    style="@style/Base.TextAppearance.AppCompat.Subhead" />
 
                 <TextView
                     android:id="@+id/repeatValueTextView"
                     android:layout_width="wrap_content"
+                    android:layout_span="4"
                     android:text="One-time event" />
 
             </TableRow>
