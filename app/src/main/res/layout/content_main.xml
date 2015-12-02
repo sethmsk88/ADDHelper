@@ -26,6 +26,7 @@
 
                 <TextView
                     android:id="@+id/taskNameTextView"
+                    style="@style/Base.TextAppearance.AppCompat.Subhead"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="end"
@@ -33,9 +34,7 @@
                     android:paddingLeft="0dp"
                     android:paddingRight="8dp"
                     android:paddingStart="0dp"
-                    android:text="Task Name"
-                    style="@style/Base.TextAppearance.AppCompat.Subhead"
-                    />
+                    android:text="Task Name" />
 
                 <EditText
                     android:id="@+id/taskNameEditText"
@@ -43,7 +42,7 @@
                     android:layout_height="wrap_content"
                     android:layout_span="4"
                     android:layout_weight="1"
-                    android:inputType="text" />
+                    android:inputType="textCapSentences" />
 
             </TableRow>
 
@@ -54,6 +53,7 @@
 
                 <TextView
                     android:id="@+id/lengthTimeTextView"
+                    style="@style/Base.TextAppearance.AppCompat.Subhead"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="end"
@@ -61,8 +61,7 @@
                     android:paddingLeft="0dp"
                     android:paddingRight="8dp"
                     android:paddingStart="0dp"
-                    android:text="Length of Time"
-                    style="@style/Base.TextAppearance.AppCompat.Subhead" />
+                    android:text="Length of Time" />
 
                 <EditText
                     android:id="@+id/lengthTimeHrEditText"
@@ -71,16 +70,18 @@
                     android:layout_marginEnd="2dp"
                     android:layout_marginRight="2dp"
                     android:layout_weight=".5"
+                    android:gravity="center_horizontal"
                     android:inputType="number" />
 
                 <TextView
                     android:id="@+id/lengthTimeHrTextView"
+                    style="@style/Base.TextAppearance.AppCompat.Body1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="20dp"
                     android:layout_marginRight="20dp"
                     android:text="Hr"
-                    style="@style/Base.TextAppearance.AppCompat.Body1"/>
+                    android:maxLength="2"/>
 
                 <EditText
                     android:id="@+id/lengthTimeMinEditText"
@@ -89,16 +90,18 @@
                     android:layout_marginEnd="2dp"
                     android:layout_marginRight="2dp"
                     android:layout_weight=".5"
-                    android:inputType="number" />
+                    android:gravity="center_horizontal"
+                    android:inputType="number"
+                    android:maxLength="2"/>
 
                 <TextView
                     android:id="@+id/lengthTimeMinTextView"
+                    style="@style/Base.TextAppearance.AppCompat.Body1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="20dp"
                     android:layout_marginRight="20dp"
-                    android:text="Min"
-                    style="@style/Base.TextAppearance.AppCompat.Body1"/>
+                    android:text="Min" />
 
             </TableRow>
 
@@ -109,6 +112,7 @@
 
                 <TextView
                     android:id="@+id/repeatTextView"
+                    style="@style/Base.TextAppearance.AppCompat.Subhead"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="end"
@@ -116,8 +120,7 @@
                     android:paddingLeft="0dp"
                     android:paddingRight="8dp"
                     android:paddingStart="0dp"
-                    android:text="Repeat"
-                    style="@style/Base.TextAppearance.AppCompat.Subhead" />
+                    android:text="Repeat" />
 
                 <TextView
                     android:id="@+id/repeatValueTextView"
