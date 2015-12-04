@@ -142,7 +142,7 @@
                 android:layout_height="wrap_content">
 
                 <ToggleButton
-                    android:id="@+id/dayMondayToggleButton"
+                    android:id="@+id/sundayToggleButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="-2dp"
@@ -152,10 +152,11 @@
                     android:minWidth="0dp"
                     android:textOff="S"
                     android:textOn="S"
-                    android:textSize="26sp" />
+                    android:textSize="26sp"
+                    android:onClick="changeDays"/>
 
                 <ToggleButton
-                    android:id="@+id/dayTuesdayToggleButton"
+                    android:id="@+id/mondayToggleButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="-2dp"
@@ -165,10 +166,11 @@
                     android:minWidth="0dp"
                     android:textOff="M"
                     android:textOn="M"
-                    android:textSize="26sp" />
+                    android:textSize="26sp"
+                    android:onClick="changeDays"/>
 
                 <ToggleButton
-                    android:id="@+id/dayWednesdayToggleButton"
+                    android:id="@+id/tuesdayToggleButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="-2dp"
@@ -178,10 +180,11 @@
                     android:minWidth="0dp"
                     android:textOff="T"
                     android:textOn="T"
-                    android:textSize="26sp" />
+                    android:textSize="26sp"
+                    android:onClick="changeDays"/>
 
                 <ToggleButton
-                    android:id="@+id/dayThursdayToggleButton"
+                    android:id="@+id/wednesdayToggleButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="-2dp"
@@ -191,10 +194,11 @@
                     android:minWidth="0dp"
                     android:textOff="W"
                     android:textOn="W"
-                    android:textSize="26sp" />
+                    android:textSize="26sp"
+                    android:onClick="changeDays"/>
 
                 <ToggleButton
-                    android:id="@+id/dayFridayToggleButton"
+                    android:id="@+id/thursdayToggleButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="-2dp"
@@ -204,10 +208,11 @@
                     android:minWidth="0dp"
                     android:textOff="T"
                     android:textOn="T"
-                    android:textSize="26sp" />
+                    android:textSize="26sp"
+                    android:onClick="changeDays"/>
 
                 <ToggleButton
-                    android:id="@+id/daySaturdayToggleButton"
+                    android:id="@+id/fridayToggleButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="-2dp"
@@ -217,10 +222,11 @@
                     android:minWidth="0dp"
                     android:textOff="F"
                     android:textOn="F"
-                    android:textSize="26sp" />
+                    android:textSize="26sp"
+                    android:onClick="changeDays"/>
 
                 <ToggleButton
-                    android:id="@+id/daySundayToggleButton"
+                    android:id="@+id/saturdayToggleButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="-2dp"
@@ -230,7 +236,8 @@
                     android:minWidth="0dp"
                     android:textOff="S"
                     android:textOn="S"
-                    android:textSize="26sp" />
+                    android:textSize="26sp"
+                    android:onClick="changeDays"/>
 
             </TableRow>
         </TableLayout>
@@ -240,7 +247,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:onClick=""
+        android:onClick="addTask"
         android:text="Add Task"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="80dp"
