@@ -3,12 +3,15 @@ package com.example.seth.addhelper;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+
+import java.util.List;
 
 public class ViewTasksActivity extends AppCompatActivity {
 
@@ -18,6 +21,8 @@ public class ViewTasksActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_tasks);
 
         loadTasks();
+
+        dumpTasksToLog(); // DEBUGGING
 
         /*
         // TESTING Intents
@@ -78,6 +83,21 @@ public class ViewTasksActivity extends AppCompatActivity {
                 view.setSelected(true);
             }
         });
+    }
+
+    /**
+     * DEBUGGING
+     */
+    public void dumpTasksToLog() {
+        Log.d("Reading: ", "Reading all tasks...");
+        DatabaseHandler db = new DatabaseHandler(this);
+        List<Task> tasks = db.getAllTasks();
+
+        for (Task t : tasks) {
+            String log = "Id: " + t.getID() + " ,Task Name: " + t.getName() + " ,Length: " +
+                    t.getLength() + " ,Days: " + t.getDays();
+            Log.d("TableRow ", log);
+        }
     }
 
 }

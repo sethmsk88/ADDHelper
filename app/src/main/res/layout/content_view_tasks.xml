@@ -42,9 +42,16 @@
         <ListView
             android:id="@+id/tasks_list_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp">
 
         </ListView>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/start_task_button"
+            android:text="Start Task"/>
 
     </LinearLayout>
 

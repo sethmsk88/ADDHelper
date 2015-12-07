@@ -16,8 +16,7 @@ import java.util.List;
 
 public class AddTasksActivity extends AppCompatActivity {
 
-    public static String days = "0000000"; // "SMTWTFS"
-    public static DatabaseHandler db = null;
+    private static String days = ""; // "SMTWTFS"
 
     public static final String DB_NAME = "ADHD_DB";
 
@@ -29,10 +28,12 @@ public class AddTasksActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_tasks);
 
-        db = new DatabaseHandler(this);
+        // Initialize days (SMTWTFS)
+        days = "0000000";
 
         // Inserting test tasks
         /*
+        DatabaseHandler db = new DatabaseHandler(this);
         Log.d("Insert: ", "Inserting...");
         db.addTask(new Task("Android Project", 90, "0101010"));
         db.addTask(new Task("Science Project", 90, "0010101"));
@@ -44,7 +45,7 @@ public class AddTasksActivity extends AppCompatActivity {
         for (Task t : tasks) {
             String log = "Id: " + t.getID() + " ,Task Name: " + t.getName() + " ,Length: " +
                     t.getLength() + " ,Days: " + t.getDays();
-            Log.d("Name: ", log);
+            Log.d("Row: ", log);
         }*/
     }
 
@@ -90,12 +91,13 @@ public class AddTasksActivity extends AppCompatActivity {
         int lengthTotalMin = lengthTimeHr * 60 + lengthTimeMin;
 
         Task task = new Task(taskName, lengthTotalMin, days);
+        DatabaseHandler db = new DatabaseHandler(this);
         db.addTask(task); // Insert task into database
 
         dumpTasksToLog(); // DEBUGGING
 
         // Switch to ViewTasks activity
-        changeActivity();
+        changeActivity(null);
     }
 
 
@@ -187,12 +189,17 @@ public class AddTasksActivity extends AppCompatActivity {
         }
     }
 
+    public void changeActivity(View view) {
+        Intent intent = new Intent(this, ViewTasksActivity.class);
+        startActivity(intent);
+    }
 
     /**
      * DEBUGGING
      */
     public void dumpTasksToLog() {
         Log.d("Reading: ", "Reading all tasks...");
+        DatabaseHandler db = new DatabaseHandler(this);
         List<Task> tasks = db.getAllTasks();
 
         for (Task t : tasks) {
@@ -200,11 +207,6 @@ public class AddTasksActivity extends AppCompatActivity {
                     t.getLength() + " ,Days: " + t.getDays();
             Log.d("TableRow ", log);
         }
-    }
-
-    public void changeActivity() {
-        Intent intent = new Intent(this, ViewTasksActivity.class);
-        startActivity(intent);
     }
 
     /**
