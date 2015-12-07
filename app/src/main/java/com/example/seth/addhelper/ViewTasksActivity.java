@@ -11,9 +11,14 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
+import java.util.Date;
 import java.util.List;
 
 public class ViewTasksActivity extends AppCompatActivity {
+
+    private long taskStartTime, taskEndTime;
+    private int currentTask_ID; // task currently being worked on
+    private final DatabaseHandler dbHandler = new DatabaseHandler(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +77,6 @@ public class ViewTasksActivity extends AppCompatActivity {
         int[] toViews = {R.id.taskNameTextView, R.id.taskLengthCompleteTextView,
                 R.id.taskLengthTextView};
 
-        DatabaseHandler dbHandler = new DatabaseHandler(this);
         SimpleCursorAdapter myAdapter = new SimpleCursorAdapter(this,
                 R.layout.task_list_item, dbHandler.getCursor(), fromCols, toViews);
         ListView listView = (ListView) findViewById(R.id.tasks_list_view);
@@ -81,9 +85,32 @@ public class ViewTasksActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 view.setSelected(true);
+
+                int item_id = dbHandler.task_ids.get(position);
+                //int item_id = Integer.parseInt(item.split("-")[0]);
+                Log.d("ViewTasksActivity", String.valueOf(item_id));
             }
         });
     }
+
+    /**
+     * Start task timer
+     */
+    public void startTaskTimer(View view) {
+        taskStartTime = (new Date()).getTime();
+    }
+
+    /**
+     * Stop task timer
+     * @return Time elapsed since timer was started
+     */
+    public long stopTaskTimer(View view) {
+        taskEndTime = (new Date()).getTime();
+
+        return 1;
+    }
+
+
 
     /**
      * DEBUGGING
