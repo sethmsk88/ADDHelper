@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
@@ -86,31 +87,32 @@ public class ViewTasksActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 view.setSelected(true);
 
-                int item_id = dbHandler.task_ids.get(position);
+                currentTask_ID = dbHandler.task_ids.get(position);
                 //int item_id = Integer.parseInt(item.split("-")[0]);
-                Log.d("ViewTasksActivity", String.valueOf(item_id));
+                Log.d("ViewTasksActivity", String.valueOf(currentTask_ID));
             }
         });
     }
 
     /**
-     * Start task timer
+     * Start/Stop task timer
      */
-    public void startTaskTimer(View view) {
-        taskStartTime = (new Date()).getTime();
+    public void startStopTaskTimer(View view) {
+        Button startStopTaskButton = (Button) findViewById(view.getId());
+        String buttonText = startStopTaskButton.getText().toString().toLowerCase();
+        if(buttonText.contains("start")) {
+            taskStartTime = (new Date()).getTime(); // start timer
+            startStopTaskButton.setText("Stop Task");
+        }
+        else if (buttonText.contains("stop")) {
+            taskEndTime = (new Date()).getTime(); // stop timer
+            startStopTaskButton.setText("Start Task");
+
+            // TESTING
+            Log.d("ViewTasksActivity", String.valueOf(taskEndTime - taskStartTime) + "ms");
+        }
+
     }
-
-    /**
-     * Stop task timer
-     * @return Time elapsed since timer was started
-     */
-    public long stopTaskTimer(View view) {
-        taskEndTime = (new Date()).getTime();
-
-        return 1;
-    }
-
-
 
     /**
      * DEBUGGING
