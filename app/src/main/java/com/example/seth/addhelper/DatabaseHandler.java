@@ -22,7 +22,8 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     public static final String ID = "_id";
     public static final String TASK_NAME = "TaskName";
     public static final String LENGTH_MIN = "LengthMinutes";
-    public static final String DAYS = "days";
+    public static final String LENGTH_MIN_COMPLETE = "LengthMinutesComplete";
+    public static final String DAYS = "Days";
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -32,8 +33,11 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_TASKS_TABLE = "CREATE TABLE " + TABLE_TASKS + "(" +
-                ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + TASK_NAME + " VARCHAR(64)," +
-                LENGTH_MIN + " INTEGER," + DAYS + " VARCHAR(8))";
+                ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                TASK_NAME + " VARCHAR(64)," +
+                LENGTH_MIN + " INTEGER," +
+                LENGTH_MIN_COMPLETE + " INTEGER," +
+                DAYS + " VARCHAR(8))";
         db.execSQL(CREATE_TASKS_TABLE);
     }
 
@@ -55,6 +59,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         ContentValues values = new ContentValues();
         values.put(TASK_NAME, task.getName());
         values.put(LENGTH_MIN, task.getLength());
+        values.put(LENGTH_MIN_COMPLETE, 0);
         values.put(DAYS, task.getDays());
 
         // Inserting row
@@ -67,8 +72,9 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.query(TABLE_TASKS, new String[] {ID, TASK_NAME, LENGTH_MIN, DAYS},
-                ID + "=?", new String[] {String.valueOf(id)}, null, null, null, null);
+        Cursor cursor = db.query(TABLE_TASKS, new String[] {ID, TASK_NAME, LENGTH_MIN,
+                        LENGTH_MIN_COMPLETE, DAYS}, ID + "=?", new String[] {String.valueOf(id)},
+                null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
 
@@ -96,7 +102,8 @@ public class DatabaseHandler extends SQLiteOpenHelper{
                 task.setID(Integer.parseInt(cursor.getString(0)));
                 task.setName(cursor.getString(1));
                 task.setLength(Integer.parseInt(cursor.getString(2)));
-                task.setDays(cursor.getString(3));
+                task.setLengthComplete(Integer.parseInt(cursor.getString(3)));
+                task.setDays(cursor.getString(4));
 
                 // Add task to list
                 taskList.add(task);

@@ -61,12 +61,14 @@ public class ViewTasksActivity extends AppCompatActivity {
      * Query tasks from database and load them into a list
      */
     public void loadTasks() {
-        String[] fromCols = {DatabaseHandler.TASK_NAME};
-        int[] toViews = {android.R.id.text1};
+        String[] fromCols = {DatabaseHandler.TASK_NAME, DatabaseHandler.LENGTH_MIN_COMPLETE,
+                DatabaseHandler.LENGTH_MIN};
+        int[] toViews = {R.id.taskNameTextView, R.id.taskLengthCompleteTextView,
+                R.id.taskLengthTextView};
 
         DatabaseHandler dbHandler = new DatabaseHandler(this);
         SimpleCursorAdapter myAdapter = new SimpleCursorAdapter(this,
-                android.R.layout.simple_list_item_1, dbHandler.getCursor(), fromCols, toViews);
+                R.layout.task_list_item, dbHandler.getCursor(), fromCols, toViews);
         ListView listView = (ListView) findViewById(R.id.tasks_list_view);
         listView.setAdapter(myAdapter);
     }

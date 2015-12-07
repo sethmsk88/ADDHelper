@@ -12,6 +12,7 @@ public class Task {
     private int _id;
     private String _name;
     private int _length;
+    private int _lengthComplete;
     private String _days;
 
     // Empty constructor
@@ -64,6 +65,12 @@ public class Task {
         this._length = length;
     }
 
+    // Getting Task Length Complete
+    public int getLengthComplete() { return this._lengthComplete; }
+
+    // Getting Task Length Complete
+    public void setLengthComplete(int lengthComplete) { this._lengthComplete = lengthComplete; }
+
     // Getting days
     public String getDays() {
         return this._days;
@@ -73,14 +80,4 @@ public class Task {
     public void setDays(String days) {
         this._days = days;
     }
-
-    /*private static final class Tasks implements BaseColumns {
-        private Tasks() {
-        }
-
-        public static final Uri CONTENT_URI = Uri.parse("content://" +
-            TasksContentProvider.AUTHORITY + "/tasks");
-
-        public static final String CONTENT_TYPE = ""; // Don't know what this is
-    }*/
 }
