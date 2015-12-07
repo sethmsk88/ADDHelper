@@ -1,5 +1,8 @@
 package com.example.seth.addhelper;
 
+import android.net.Uri;
+import android.provider.BaseColumns;
+
 /**
  * Created by Seth on 12/3/2015.
  */
@@ -70,4 +73,14 @@ public class Task {
     public void setDays(String days) {
         this._days = days;
     }
+
+    /*private static final class Tasks implements BaseColumns {
+        private Tasks() {
+        }
+
+        public static final Uri CONTENT_URI = Uri.parse("content://" +
+            TasksContentProvider.AUTHORITY + "/tasks");
+
+        public static final String CONTENT_TYPE = ""; // Don't know what this is
+    }*/
 }

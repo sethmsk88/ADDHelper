@@ -15,14 +15,14 @@ import java.util.List;
 public class DatabaseHandler extends SQLiteOpenHelper{
 
     public static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "ADHD_DB";
-    private static final String TABLE_TASKS = "tasks";
+    public static final String DATABASE_NAME = "ADD.db";
+    public static final String TABLE_TASKS = "tasks";
 
     // Table column names
-    private static final String ID = "T_ID";
-    private static final String TASK_NAME = "TaskName";
-    private static final String LENGTH_MIN = "LengthMinutes";
-    private static final String DAYS = "days";
+    public static final String ID = "_id";
+    public static final String TASK_NAME = "TaskName";
+    public static final String LENGTH_MIN = "LengthMinutes";
+    public static final String DAYS = "days";
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -103,6 +103,16 @@ public class DatabaseHandler extends SQLiteOpenHelper{
             } while (cursor.moveToNext());
         }
         return taskList;
+    }
+
+    // Get a cursor
+    public Cursor getCursor() {
+        String selectQuery = "SELECT * FROM " + TABLE_TASKS;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        return cursor;
     }
 
     // Updating a single task
