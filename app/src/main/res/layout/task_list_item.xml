@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="horizontal">
 
     <TextView
@@ -15,43 +15,41 @@
         android:paddingStart="?android:attr/listPreferredItemPaddingStart"
         android:paddingRight="0dp"
         android:paddingEnd="0dp"
-        android:text="Android Project"
         android:textAppearance="?android:attr/textAppearanceListItemSmall"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:background="@drawable/selector"/>
 
     <TextView
         android:id="@+id/taskLengthCompleteTextView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        android:background="@drawable/selector"
+        android:gravity="center"
+        />
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=" of " />
+        android:layout_height="match_parent"
+        android:text=" of "
+        android:background="@drawable/selector"
+        android:gravity="center"/>
 
     <TextView
         android:id="@+id/taskLengthTextView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        android:background="@drawable/selector"
+        android:gravity="center"/>
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:text=" min complete"
-        android:paddingRight="?android:attr/listPreferredItemPaddingRight"
-        android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"/>
-
-    <!--<TextView
-        android:id="@+id/taskProgressTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="end"
         android:paddingLeft="0dp"
         android:paddingStart="0dp"
-        android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
         android:paddingRight="?android:attr/listPreferredItemPaddingRight"
-        android:text="0 of 90 minutes complete" />-->
-
+        android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+        android:background="@drawable/selector"
+        android:gravity="center"/>
 
 </LinearLayout>
