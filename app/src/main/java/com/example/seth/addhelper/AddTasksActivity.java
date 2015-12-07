@@ -93,6 +93,9 @@ public class AddTasksActivity extends AppCompatActivity {
         db.addTask(task); // Insert task into database
 
         dumpTasksToLog(); // DEBUGGING
+
+        // Switch to ViewTasks activity
+        changeActivity();
     }
 
 
@@ -199,7 +202,7 @@ public class AddTasksActivity extends AppCompatActivity {
         }
     }
 
-    public void changeActivity(View view) {
+    public void changeActivity() {
         Intent intent = new Intent(this, ViewTasksActivity.class);
         startActivity(intent);
     }
