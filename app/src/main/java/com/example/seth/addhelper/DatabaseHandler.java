@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,8 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "ADD.db";
     public static final String TABLE_TASKS = "tasks";
+
+    public static ArrayList<Integer> task_ids;
 
     // Table column names
     public static final String ID = "_id";
@@ -72,8 +75,8 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.query(TABLE_TASKS, new String[] {ID, TASK_NAME, LENGTH_MIN,
-                        LENGTH_MIN_COMPLETE, DAYS}, ID + "=?", new String[] {String.valueOf(id)},
+        Cursor cursor = db.query(TABLE_TASKS, new String[]{ID, TASK_NAME, LENGTH_MIN,
+                        LENGTH_MIN_COMPLETE, DAYS}, ID + "=?", new String[]{String.valueOf(id)},
                 null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
@@ -81,7 +84,8 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         Task task = new Task(Integer.parseInt(cursor.getString(0)),
                 cursor.getString(1),
                 Integer.parseInt(cursor.getString(2)),
-                cursor.getString(3));
+                Integer.parseInt(cursor.getString(3)),
+                cursor.getString(4));
 
         return task;
     }
@@ -114,17 +118,35 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 
     // Get a cursor
     public Cursor getCursor() {
-        String selectQuery = "SELECT * FROM " + TABLE_TASKS;
+        String selectQuery = "SELECT * FROM " + TABLE_TASKS + " ORDER BY " + ID;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
+
+        task_ids = new ArrayList();
+
+        // Loop through all rows and add the ids to the array
+        if (cursor.moveToFirst()) {
+            do {
+                task_ids.add(Integer.parseInt(cursor.getString(0)));
+            } while (cursor.moveToNext());
+        }
 
         return cursor;
     }
 
     // Updating a single task
-    public int updateTask(Task task) {
-        return 0;
+    public void updateTask(Task task) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(LENGTH_MIN_COMPLETE, task.getLengthComplete());
+
+        String whereClause = DatabaseHandler.ID + "=" + task.getID();
+
+        // Inserting row
+        db.update(TABLE_TASKS, values, whereClause, null);
+        db.close();
     }
 
     // Deleting a single task

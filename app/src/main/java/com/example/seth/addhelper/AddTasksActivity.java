@@ -204,7 +204,8 @@ public class AddTasksActivity extends AppCompatActivity {
 
         for (Task t : tasks) {
             String log = "Id: " + t.getID() + " ,Task Name: " + t.getName() + " ,Length: " +
-                    t.getLength() + " ,Days: " + t.getDays();
+                    t.getLength() + ",LengthComplete: " + t.getLengthComplete() + " ,Days: " +
+                    t.getDays();
             Log.d("TableRow ", log);
         }
     }

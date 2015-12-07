@@ -27,17 +27,16 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:layout_marginTop="2dp"
             android:layout_marginBottom="16dp"
+            android:layout_marginTop="2dp"
             android:background="#666666" />
 
         <Button
             android:id="@+id/add_new_task_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add New Task"
             android:onClick="changeActivity"
-            />
+            android:text="Add New Task" />
 
         <ListView
             android:id="@+id/tasks_list_view"
@@ -48,10 +47,11 @@
         </ListView>
 
         <Button
+            android:id="@+id/start_stop_task_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/start_task_button"
-            android:text="Start Task"/>
+            android:text="Start Task"
+            android:onClick="startStopTaskTimer"/>
 
     </LinearLayout>
 

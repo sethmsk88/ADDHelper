@@ -21,6 +21,15 @@ public class Task {
     }
 
     // Constructor
+    public Task(int id, String name, int length, int lengthComplete, String days) {
+        this._id = id;
+        this._name = name;
+        this._length = length;
+        this._lengthComplete = lengthComplete;
+        this._days = days;
+    }
+
+    // Constructor
     public Task(int id, String name, int length, String days) {
         this._id = id;
         this._name = name;
