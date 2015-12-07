@@ -1,5 +1,8 @@
 package com.example.seth.addhelper;
 
+import android.net.Uri;
+import android.provider.BaseColumns;
+
 /**
  * Created by Seth on 12/3/2015.
  */
@@ -9,6 +12,7 @@ public class Task {
     private int _id;
     private String _name;
     private int _length;
+    private int _lengthComplete;
     private String _days;
 
     // Empty constructor
@@ -60,6 +64,12 @@ public class Task {
     public void setLength(int length) {
         this._length = length;
     }
+
+    // Getting Task Length Complete
+    public int getLengthComplete() { return this._lengthComplete; }
+
+    // Getting Task Length Complete
+    public void setLengthComplete(int lengthComplete) { this._lengthComplete = lengthComplete; }
 
     // Getting days
     public String getDays() {
