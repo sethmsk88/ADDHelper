@@ -9,8 +9,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 import java.util.Date;
 import java.util.List;
@@ -19,6 +21,7 @@ public class ViewTasksActivity extends AppCompatActivity {
 
     private long taskStartTime, taskEndTime;
     private int currentTask_ID; // task currently being worked on
+    private int currentTaskPos; // position of task in ListView
     private final DatabaseHandler dbHandler = new DatabaseHandler(this);
 
     @Override
@@ -87,9 +90,8 @@ public class ViewTasksActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 view.setSelected(true);
 
+                currentTaskPos = position;
                 currentTask_ID = dbHandler.task_ids.get(position);
-                //int item_id = Integer.parseInt(item.split("-")[0]);
-                Log.d("ViewTasksActivity", String.valueOf(currentTask_ID));
             }
         });
     }
@@ -108,10 +110,22 @@ public class ViewTasksActivity extends AppCompatActivity {
             taskEndTime = (new Date()).getTime(); // stop timer
             startStopTaskButton.setText("Start Task");
 
-            // TESTING
-            Log.d("ViewTasksActivity", String.valueOf(taskEndTime - taskStartTime) + "ms");
-        }
+            long timeElapsedSec = (taskEndTime - taskStartTime) / 1000;
 
+            /* Update lengthComplete */
+            Task task = dbHandler.getTask(currentTask_ID);
+
+            int lengthComplete = task.getLengthComplete() + (int)timeElapsedSec;
+            task.setLengthComplete(lengthComplete);
+
+            dbHandler.updateTask(task);
+
+            /* Update completed minutes value in ListView for selected task */
+            ListView listView = (ListView) findViewById(R.id.tasks_list_view);
+            LinearLayout linLay = (LinearLayout) listView.getChildAt(currentTaskPos);
+            TextView textView = (TextView) linLay.getChildAt(1);
+            textView.setText(String.valueOf(lengthComplete));
+        }
     }
 
     /**
@@ -124,7 +138,8 @@ public class ViewTasksActivity extends AppCompatActivity {
 
         for (Task t : tasks) {
             String log = "Id: " + t.getID() + " ,Task Name: " + t.getName() + " ,Length: " +
-                    t.getLength() + " ,Days: " + t.getDays();
+                    t.getLength() + ",LengthComplete: " + t.getLengthComplete() + " ,Days: " +
+                    t.getDays();
             Log.d("TableRow ", log);
         }
     }

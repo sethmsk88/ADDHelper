@@ -84,7 +84,8 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         Task task = new Task(Integer.parseInt(cursor.getString(0)),
                 cursor.getString(1),
                 Integer.parseInt(cursor.getString(2)),
-                cursor.getString(3));
+                Integer.parseInt(cursor.getString(3)),
+                cursor.getString(4));
 
         return task;
     }
@@ -135,8 +136,17 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     }
 
     // Updating a single task
-    public int updateTask(Task task) {
-        return 0;
+    public void updateTask(Task task) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(LENGTH_MIN_COMPLETE, task.getLengthComplete());
+
+        String whereClause = DatabaseHandler.ID + "=" + task.getID();
+
+        // Inserting row
+        db.update(TABLE_TASKS, values, whereClause, null);
+        db.close();
     }
 
     // Deleting a single task
