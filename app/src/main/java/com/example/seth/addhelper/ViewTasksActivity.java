@@ -1,6 +1,8 @@
 package com.example.seth.addhelper;
 
+import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -22,6 +24,7 @@ public class ViewTasksActivity extends AppCompatActivity {
     private long taskStartTime, taskEndTime;
     private int currentTask_ID; // task currently being worked on
     private int currentTaskPos; // position of task in ListView
+    private int savedRingerMode; // ringer mode before starting task
     private final DatabaseHandler dbHandler = new DatabaseHandler(this);
 
     @Override
@@ -97,20 +100,21 @@ public class ViewTasksActivity extends AppCompatActivity {
     }
 
     /**
-     * Start/Stop task timer
+     * Start/Stop task
      */
-    public void startStopTaskTimer(View view) {
-        Button startStopTaskButton = (Button) findViewById(view.getId());
+    public void startStopTask(View view) {
+        Button startStopTaskButton = (Button) findViewById(R.id.start_stop_task_button);
         String buttonText = startStopTaskButton.getText().toString().toLowerCase();
         if(buttonText.contains("start")) {
             taskStartTime = (new Date()).getTime(); // start timer
             startStopTaskButton.setText("Stop Task");
+            silencePhone(true);
         }
         else if (buttonText.contains("stop")) {
             taskEndTime = (new Date()).getTime(); // stop timer
             startStopTaskButton.setText("Start Task");
 
-            long timeElapsedSec = (taskEndTime - taskStartTime) / 1000;
+            long timeElapsedSec = (taskEndTime - taskStartTime) / 1000; // convert to seconds
 
             /* Update lengthComplete */
             Task task = dbHandler.getTask(currentTask_ID);
@@ -125,6 +129,26 @@ public class ViewTasksActivity extends AppCompatActivity {
             LinearLayout linLay = (LinearLayout) listView.getChildAt(currentTaskPos);
             TextView textView = (TextView) linLay.getChildAt(1);
             textView.setText(String.valueOf(lengthComplete));
+
+            silencePhone(false);
+        }
+    }
+
+    /**
+     * Silence the phone
+     * @param silence
+     */
+    public void silencePhone(boolean silence) {
+        AudioManager audioMan = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+
+        if (silence) {
+            // Set ringer mode to silent
+            savedRingerMode = audioMan.getRingerMode();
+            audioMan.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+        }
+        else {
+            // Set ringer mode to it's previous mode
+            audioMan.setRingerMode(savedRingerMode);
         }
     }
 
