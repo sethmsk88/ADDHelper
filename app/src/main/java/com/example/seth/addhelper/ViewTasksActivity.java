@@ -70,6 +70,13 @@ public class ViewTasksActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        startStopTask(null);
+    }
+
     public void changeActivity(View view) {
         Intent intent = new Intent(this, AddTasksActivity.class);
         startActivity(intent);
