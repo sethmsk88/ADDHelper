@@ -37,6 +37,7 @@ public class ViewTasksActivity extends AppCompatActivity {
 
     private int currentTask_ID; // task currently being worked on
     private int currentTaskPos; // position of task in ListView
+    private int taskLength; // length of selected task
     private int lengthComplete; // seconds of task completed
     private int savedRingerMode; // ringer mode before starting task
     private int daySelected; // view tasks on this day
@@ -168,6 +169,7 @@ public class ViewTasksActivity extends AppCompatActivity {
                 /* Get task's current lengthComplete */
                 Task task = dbHandler.getTask(currentTask_ID);
                 lengthComplete = task.getLengthComplete();
+                taskLength = task.getLength();
             }
         });
     }
@@ -218,6 +220,8 @@ public class ViewTasksActivity extends AppCompatActivity {
             updatedTime = timeSwapBuff + timeInMilliseconds + (lengthComplete * 1000);
             secs = ((int)(updatedTime / 1000)) % 60;
 
+            checkTaskCompleted();
+
             /* Update completed minutes value in ListView for selected task */
             ListView listView = (ListView) findViewById(R.id.tasks_list_view);
             LinearLayout linLay = (LinearLayout) listView.getChildAt(currentTaskPos);
@@ -244,6 +248,14 @@ public class ViewTasksActivity extends AppCompatActivity {
             // Set ringer mode to it's previous mode
             audioMan.setRingerMode(savedRingerMode);
         }
+    }
+
+    /**
+     * Check to see if task has been completed
+     */
+    public void checkTaskCompleted() {
+        if (secs >= taskLength)
+            taskCompleteToast();
     }
 
     /**
