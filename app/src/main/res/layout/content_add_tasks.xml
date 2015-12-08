@@ -22,7 +22,8 @@
             <TableRow
                 android:id="@+id/row0"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp">
 
                 <TextView
                     android:id="@+id/taskNameTextView"
@@ -49,7 +50,8 @@
             <TableRow
                 android:id="@+id/row1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp">
 
                 <TextView
                     android:id="@+id/lengthTimeTextView"
@@ -112,7 +114,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView
+                <!--<TextView
                     android:id="@+id/repeatTextView"
                     style="@style/Base.TextAppearance.AppCompat.Subhead"
                     android:layout_width="wrap_content"
@@ -128,7 +130,7 @@
                     android:id="@+id/repeatValueTextView"
                     android:layout_width="wrap_content"
                     android:layout_span="4"
-                    android:text="One-time event" />
+                    android:text="One-time event" />-->
 
             </TableRow>
         </TableLayout>
