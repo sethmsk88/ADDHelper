@@ -1,5 +1,6 @@
 package com.example.seth.addhelper;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -12,7 +13,7 @@ public class OverviewActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_tasks);
+        setContentView(R.layout.activity_overview);
     }
 
     @Override
@@ -29,8 +30,19 @@ public class OverviewActivity extends AppCompatActivity{
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.menu_overview) {
+            Intent intent = new Intent(this, OverviewActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        else if (id == R.id.menu_view_tasks) {
+            Intent intent = new Intent(this, ViewTasksActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        else if (id == R.id.menu_add_tasks) {
+            Intent intent = new Intent(this, AddTasksActivity.class);
+            startActivity(intent);
             return true;
         }
 

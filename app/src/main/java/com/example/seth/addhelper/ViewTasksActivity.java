@@ -70,8 +70,19 @@ public class ViewTasksActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.menu_overview) {
+            Intent intent = new Intent(this, OverviewActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        else if (id == R.id.menu_view_tasks) {
+            Intent intent = new Intent(this, ViewTasksActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        else if (id == R.id.menu_add_tasks) {
+            Intent intent = new Intent(this, AddTasksActivity.class);
+            startActivity(intent);
             return true;
         }
 
