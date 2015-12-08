@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -12,12 +14,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckedTextView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -25,9 +27,17 @@ import java.util.List;
 
 public class ViewTasksActivity extends AppCompatActivity {
 
-    private long taskStartTime, taskEndTime;
+    private long taskStartTime = 0L;
+    private long timeInMilliseconds = 0L;
+    private long timeSwapBuff = 0L;
+    private long updatedTime = 0L;
+    private int secs = 0;
+    private Handler handler = new Handler();
+
+
     private int currentTask_ID; // task currently being worked on
     private int currentTaskPos; // position of task in ListView
+    private int lengthComplete; // seconds of task completed
     private int savedRingerMode; // ringer mode before starting task
     private int daySelected; // view tasks on this day
     private boolean taskRunning;
@@ -44,17 +54,6 @@ public class ViewTasksActivity extends AppCompatActivity {
         initSpinner();
 
         loadTasks();
-
-        /*
-        // TESTING Intents
-        LinearLayout layout = (LinearLayout) findViewById(R.id.linear_layout_0);
-        Intent intent = getIntent();
-        String message = intent.getStringExtra(AddTasksActivity.EXTRA_MESSAGE);
-
-        TextView tv = new TextView(this);
-        tv.setTextSize(40);
-        tv.setText(message);
-        layout.addView(tv);*/
     }
 
     @Override
@@ -154,6 +153,10 @@ public class ViewTasksActivity extends AppCompatActivity {
 
                 currentTaskPos = position;
                 currentTask_ID = dbHandler.task_ids.get(position);
+
+                /* Get task's current lengthComplete */
+                Task task = dbHandler.getTask(currentTask_ID);
+                lengthComplete = task.getLengthComplete();
             }
         });
     }
@@ -164,36 +167,55 @@ public class ViewTasksActivity extends AppCompatActivity {
     public void startStopTask(View view) {
         Button startStopTaskButton = (Button) findViewById(R.id.start_stop_task_button);
         String buttonText = startStopTaskButton.getText().toString().toLowerCase();
-        if(buttonText.contains("start")) {
-            taskRunning = true;
-            taskStartTime = (new Date()).getTime(); // start timer
+
+        if (buttonText.contains("start")) {
             startStopTaskButton.setText("Stop Task");
+            taskStartTime = SystemClock.uptimeMillis(); // start timer
+            handler.postDelayed(updateTimer, 0);
+
+            taskRunning = true;
             silencePhone(true);
         }
-        else if (buttonText.contains("stop")) {
-            taskRunning = false;
-            taskEndTime = (new Date()).getTime(); // stop timer
+        else {
             startStopTaskButton.setText("Start Task");
+            timeSwapBuff += timeInMilliseconds;
+            handler.removeCallbacks(updateTimer);
 
-            long timeElapsedSec = (taskEndTime - taskStartTime) / 1000; // convert to seconds
-
-            /* Update lengthComplete */
+            /* Update lengthComplete in database */
             Task task = dbHandler.getTask(currentTask_ID);
 
-            int lengthComplete = task.getLengthComplete() + (int)timeElapsedSec;
+            lengthComplete = (int)secs;
             task.setLengthComplete(lengthComplete);
 
             dbHandler.updateTask(task);
+
+            taskRunning = false;
+            silencePhone(false);
+
+            /* Reset timer values */
+            taskStartTime = 0L;
+            timeInMilliseconds = 0L;
+            timeSwapBuff = 0L;
+            updatedTime = 0L;
+            secs = 0;
+        }
+    }
+
+    public Runnable updateTimer = new Runnable() {
+        public void run() {
+            timeInMilliseconds = SystemClock.uptimeMillis() - taskStartTime;
+            updatedTime = timeSwapBuff + timeInMilliseconds + (lengthComplete * 1000);
+            secs = ((int)(updatedTime / 1000)) % 60;
 
             /* Update completed minutes value in ListView for selected task */
             ListView listView = (ListView) findViewById(R.id.tasks_list_view);
             LinearLayout linLay = (LinearLayout) listView.getChildAt(currentTaskPos);
             TextView textView = (TextView) linLay.getChildAt(1);
-            textView.setText(String.valueOf(lengthComplete));
+            textView.setText(String.valueOf(secs));
 
-            silencePhone(false);
+            handler.postDelayed(this, 0);
         }
-    }
+    };
 
     /**
      * Silence the phone
@@ -212,6 +234,18 @@ public class ViewTasksActivity extends AppCompatActivity {
             audioMan.setRingerMode(savedRingerMode);
         }
     }
+
+    /**
+     * Show toast telling User that task is complete
+     */
+    public void taskCompleteToast() {
+        Context context = getApplicationContext();
+        CharSequence text = "Task Complete!";
+
+        Toast toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
+        toast.show();
+    }
+
 
     /**
      * DEBUGGING
