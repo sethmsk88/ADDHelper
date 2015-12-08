@@ -52,6 +52,7 @@
                     android:text="Time Completed" />
 
                 <TextView
+                    android:id="@+id/time_completed_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -71,6 +72,7 @@
                     android:text="Time Remaining" />
 
                 <TextView
+                    android:id="@+id/time_remaining_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -90,6 +92,7 @@
                     android:text="Tasks Completed" />
 
                 <TextView
+                    android:id="@+id/tasks_completed_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -109,6 +112,7 @@
                     android:text="Tasks Remaining" />
 
                 <TextView
+                    android:id="@+id/tasks_remaining_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
