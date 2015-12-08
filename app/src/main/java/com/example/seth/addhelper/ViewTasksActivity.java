@@ -30,6 +30,7 @@ public class ViewTasksActivity extends AppCompatActivity {
     private int currentTaskPos; // position of task in ListView
     private int savedRingerMode; // ringer mode before starting task
     private int daySelected; // view tasks on this day
+    private boolean taskRunning;
     private final DatabaseHandler dbHandler = new DatabaseHandler(this);
 
     @Override
@@ -37,12 +38,12 @@ public class ViewTasksActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_tasks);
 
+        taskRunning = false;
+
         /* Populate days spinner */
         initSpinner();
 
         loadTasks();
-
-        dumpTasksToLog(); // DEBUGGING
 
         /*
         // TESTING Intents
@@ -82,7 +83,8 @@ public class ViewTasksActivity extends AppCompatActivity {
     public void onPause() {
         super.onPause();
 
-        startStopTask(null);
+        if (taskRunning)
+            startStopTask(null);
     }
 
     /**
@@ -146,6 +148,10 @@ public class ViewTasksActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 view.setSelected(true);
 
+                /* Enable start/stop task button */
+                Button startTaskButton = (Button) findViewById(R.id.start_stop_task_button);
+                startTaskButton.setEnabled(true);
+
                 currentTaskPos = position;
                 currentTask_ID = dbHandler.task_ids.get(position);
             }
@@ -159,11 +165,13 @@ public class ViewTasksActivity extends AppCompatActivity {
         Button startStopTaskButton = (Button) findViewById(R.id.start_stop_task_button);
         String buttonText = startStopTaskButton.getText().toString().toLowerCase();
         if(buttonText.contains("start")) {
+            taskRunning = true;
             taskStartTime = (new Date()).getTime(); // start timer
             startStopTaskButton.setText("Stop Task");
             silencePhone(true);
         }
         else if (buttonText.contains("stop")) {
+            taskRunning = false;
             taskEndTime = (new Date()).getTime(); // stop timer
             startStopTaskButton.setText("Start Task");
 

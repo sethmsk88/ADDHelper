@@ -65,7 +65,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Start Task"
-            android:onClick="startStopTask"/>
+            android:onClick="startStopTask"
+            android:enabled="false"/>
 
     </LinearLayout>
 
