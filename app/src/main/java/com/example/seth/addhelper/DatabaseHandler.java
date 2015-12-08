@@ -117,8 +117,40 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     }
 
     // Get a cursor
-    public Cursor getCursor() {
-        String selectQuery = "SELECT * FROM " + TABLE_TASKS + " ORDER BY " + ID;
+    public Cursor getCursor(int day) {
+
+        /* Create LIKE pattern for query to match day */
+        String dayPattern;
+        switch (day) {
+            case 1:
+                dayPattern = "1______";
+                break;
+            case 2:
+                dayPattern = "_1_____";
+                break;
+            case 3:
+                dayPattern = "__1____";
+                break;
+            case 4:
+                dayPattern = "___1___";
+                break;
+            case 5:
+                dayPattern = "____1__";
+                break;
+            case 6:
+                dayPattern = "_____1_";
+                break;
+            case 7:
+                dayPattern = "______1";
+                break;
+            default:
+                dayPattern = "%";
+                break;
+        }
+
+        String selectQuery = "SELECT * FROM " + TABLE_TASKS +
+                " WHERE " + DAYS + " LIKE '" + dayPattern + "'" +
+                " ORDER BY " + ID;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);

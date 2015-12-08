@@ -12,12 +12,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckedTextView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -27,6 +29,7 @@ public class ViewTasksActivity extends AppCompatActivity {
     private int currentTask_ID; // task currently being worked on
     private int currentTaskPos; // position of task in ListView
     private int savedRingerMode; // ringer mode before starting task
+    private int daySelected; // view tasks on this day
     private final DatabaseHandler dbHandler = new DatabaseHandler(this);
 
     @Override
@@ -35,11 +38,7 @@ public class ViewTasksActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_tasks);
 
         /* Populate days spinner */
-        Spinner spinner = (Spinner) findViewById(R.id.days_spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.days_spinner_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        initSpinner();
 
         loadTasks();
 
@@ -86,6 +85,44 @@ public class ViewTasksActivity extends AppCompatActivity {
         startStopTask(null);
     }
 
+    /**
+     *  Populate the days spinner and set the item selected listener
+     */
+    public void initSpinner() {
+        Spinner spinner = (Spinner) findViewById(R.id.days_spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.days_spinner_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setSelection(getCurrentDay(), true);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                daySelected = position;
+                loadTasks();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+
+            }
+        });
+    }
+
+    /**
+     * Get the index of the current day of the week
+     */
+    public int getCurrentDay() {
+        /* Get current day of week */
+        Calendar c = Calendar.getInstance();
+        c.setTime(new Date());
+        return daySelected = c.get(Calendar.DAY_OF_WEEK);
+    }
+
+    /**
+     * Change activity to AddTasksActivity
+     * @param view
+     */
     public void changeActivity(View view) {
         Intent intent = new Intent(this, AddTasksActivity.class);
         startActivity(intent);
@@ -101,7 +138,7 @@ public class ViewTasksActivity extends AppCompatActivity {
                 R.id.taskLengthTextView};
 
         SimpleCursorAdapter myAdapter = new SimpleCursorAdapter(this,
-                R.layout.task_list_item, dbHandler.getCursor(), fromCols, toViews);
+                R.layout.task_list_item, dbHandler.getCursor(daySelected), fromCols, toViews);
         ListView listView = (ListView) findViewById(R.id.tasks_list_view);
         listView.setAdapter(myAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
