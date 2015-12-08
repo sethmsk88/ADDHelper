@@ -2,21 +2,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ViewTasksActivity">
+
     <item
-        android:id="@+id/action_view_tasks"
+        android:id="@+id/menu_overview"
         android:orderInCategory="1"
+        android:title="Overview"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_view_tasks"
+        android:orderInCategory="2"
         android:title="View Tasks"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_add_tasks"
-        android:orderInCategory="2"
+        android:id="@+id/menu_add_tasks"
+        android:orderInCategory="3"
         android:title="Add Tasks"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
         app:showAsAction="never" />
 </menu>
