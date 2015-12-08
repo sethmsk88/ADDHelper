@@ -19,9 +19,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".AddTasksActivity">
-        </activity>
+        <activity android:name=".AddTasksActivity"></activity>
+        <activity android:name=".OverviewActivity"></activity>
     </application>
 <!--android.permission.MODIFY_AUDIO_SETTINGS-->
 </manifest>
