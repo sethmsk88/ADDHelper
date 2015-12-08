@@ -42,77 +42,111 @@
             android:layout_height="wrap_content">
 
             <TableRow android:layout_marginBottom="8dp">
+
                 <TextView
                     style="@style/Base.TextAppearance.AppCompat.Body1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:text="Time Completed ...................."
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:text="Time Completed ...................." />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight=".5"
                     android:text="1h 37m"
-                    android:textSize="24sp"
-                    android:layout_weight=".5"
-                    android:textColor="@color/completedGreen"/>
+                    android:textColor="@color/completedGreen"
+                    android:textSize="24sp" />
             </TableRow>
 
             <TableRow android:layout_marginBottom="8dp">
+
                 <TextView
                     style="@style/Base.TextAppearance.AppCompat.Body1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:text="Time Remaining ...................."
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:text="Time Remaining ...................." />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight=".5"
                     android:text="2h 45m"
-                    android:textSize="24sp"
-                    android:layout_weight=".5"
-                    android:textColor="@color/remainingOrange"/>
+                    android:textColor="@color/remainingOrange"
+                    android:textSize="24sp" />
             </TableRow>
 
             <TableRow android:layout_marginBottom="8dp">
+
                 <TextView
                     style="@style/Base.TextAppearance.AppCompat.Body1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:text="Tasks Completed ..................."
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:text="Tasks Completed ..................." />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight=".5"
                     android:text="2"
-                    android:textSize="24sp"
-                    android:layout_weight=".5"
-                    android:textColor="@color/completedGreen"/>
+                    android:textColor="@color/completedGreen"
+                    android:textSize="24sp" />
             </TableRow>
 
             <TableRow android:layout_marginBottom="8dp">
+
                 <TextView
                     style="@style/Base.TextAppearance.AppCompat.Body1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:text="Tasks Remaining ...................."
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:text="Tasks Remaining ...................." />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="3"
-                    android:textSize="24sp"
                     android:layout_weight=".5"
-                    android:textColor="@color/remainingOrange"/>
+                    android:text="3"
+                    android:textColor="@color/remainingOrange"
+                    android:textSize="24sp" />
             </TableRow>
 
+            <TableRow android:layout_marginTop="22dp">
+
+                <TextView
+                    style="@style/Base.TextAppearance.AppCompat.Title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Einstein" />
+
+            </TableRow>
+
+            <TableRow android:layout_marginBottom="4dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="2 hours completed in a day" />
+            </TableRow>
+
+            <TableRow>
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/einstein_badge" />
+            </TableRow>
 
         </TableLayout>
     </LinearLayout>
